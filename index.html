@@ -1,7 +1,11 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Fernando Cassola Personal WebPage</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
-</html>
+---
+# front matter tells Jekyll to process Liquid
+layout: default
+
+title: Fernando Cassola Online
+
+my_number: 5
+---
+<h1>{{"Fernando Cassola Personal WebPage" | downcase}}</h1>
+<p>I'm hosted with GitHub Pages. Give me {{page.my_number}}</p>
+   
