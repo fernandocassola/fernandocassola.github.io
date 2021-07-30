@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+# gemspec
 
-# gem "rails"
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
-gem "jekyll", "~> 4.1"
+gem "alembic-jekyll-theme"
