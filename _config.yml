@@ -96,7 +96,7 @@ defaults:
 encoding: utf-8 # Make sure the encoding is right
 lang: en-GB # Set the site language
 title: "Fernando Cassola " # Site name or title, also used in jekyll-seo-tag
-logo: "/assets/logos/logo.svg" # Site logo, also used in jekyll-seo-tag
+logo: "/assets/logos/profile_color.png" # Site logo, also used in jekyll-seo-tag
 description: "Fernando Cassola personal web site" # Site description and default description, also used in jekyll-seo-tag
 url: "https://fernandocassola.com" # Site url, also used in jekyll-seo-tag
 baseurl: ""

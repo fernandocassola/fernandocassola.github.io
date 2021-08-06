@@ -1,8 +1,8 @@
 ---
-title: Welcome
+title: <h3 id="heading-3">Welcome| under construction</h3>
 feature_text: |
   ## Fernando Cassola
-  It is with great pleasure and gratitude that I welcome you to my personal website
+  <p style="color:#ffffff">It is with great pleasure and gratitude that I welcome you to my personal website</p>
   
   [![twitter](/assets/logos/twitter.png)](https://twitter.com/fernandocassola){:style="background: none"}
   [![facebook](/assets/logos/fb.png)](https://facebook.com/fernandocassola){:style="background: none"}
@@ -22,3 +22,14 @@ excerpt: "I am a researcher at [INESC TEC](https://www.inesctec.pt/en) and invit
 <small>He has worked in several research projects at [INESC TEC](https://www.inesctec.pt/en), namely: OnlineGym (3D Virtual Gym); eCompared; StopDepression; NanoStima; GresBas; FEEdBACk H2020; VR Training. Actualy is working on the MELOA H2020 project, witch aims to ...</small>
 
 <small>He is a life lover and scouting is his great hobby …</small>
+
+Areas of Interest
+
+    Serious games
+    Behaviour change
+    Gammification
+    Mobile apps
+    Virtual Environments
+    Computer science
+    Educational Technology
+
