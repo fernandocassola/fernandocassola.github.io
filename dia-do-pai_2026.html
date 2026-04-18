@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Dia do Pai Nandão 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #f5efe6;
+    --warm: #e8d5b0;
+    --gold: #c9922a;
+    --deep: #3b2a1a;
+    --rust: #a84b2f;
+    --sage: #6b7c5e;
+    --sky: #6fa8c7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--deep);
+    font-family: 'Crimson Pro', Georgia, serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── Stars / floating dots ── */
+  .bg-canvas {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+  .dot {
+    position: absolute; border-radius: 50%;
+    animation: drift linear infinite;
+    opacity: 0;
+  }
+  @keyframes drift {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: .6; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--rust);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(3.2rem, 11vw, 9rem);
+    line-height: 1;
+    color: var(--deep);
+    animation: fadeUp .9s .1s ease both;
+  }
+
+  .hero-title span {
+    display: block;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    max-width: 540px;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    line-height: 1.75;
+    color: #6b5540;
+    margin-top: 1.8rem;
+    font-weight: 300;
+    animation: fadeUp 1s .25s ease both;
+  }
+
+  .heart-btn {
+    margin-top: 2.8rem;
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    letter-spacing: .08em;
+    padding: .85rem 2.2rem;
+    border: none; border-radius: 50px;
+    cursor: pointer;
+    transition: background .3s, transform .2s;
+    animation: fadeUp 1s .4s ease both;
+    text-decoration: none;
+  }
+  .heart-btn:hover { background: var(--rust); transform: scale(1.05); }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem;
+    font-size: .85rem; letter-spacing: .12em;
+    color: #a08060; text-transform: uppercase;
+    animation: bob 2s ease-in-out infinite, fadeUp 1s .6s ease both;
+    opacity: 0;
+  }
+  @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Divider ── */
+  .divider {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 0 2rem; max-width: 700px; margin: 0 auto;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--warm);
+  }
+  .divider-icon { font-size: 1.6rem; }
+
+  /* ── Cards section ── */
+  .cards {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.6rem;
+    max-width: 960px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+  }
+
+  .card {
+    background: white;
+    border-radius: 1.2rem;
+    padding: 2rem 1.8rem;
+    box-shadow: 0 4px 24px rgba(59,42,26,.08);
+    transition: transform .3s, box-shadow .3s;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .6s ease, transform .6s ease, box-shadow .3s;
+  }
+  .card.visible { opacity: 1; transform: translateY(0); }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(59,42,26,.14); }
+
+  .card-icon { font-size: 2.6rem; margin-bottom: .8rem; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--deep); margin-bottom: .5rem;
+  }
+  .card-text {
+    font-size: 1rem; line-height: 1.7;
+    color: #7a6050; font-weight: 300;
+  }
+
+  /* ── Big quote ── */
+  .quote-section {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 5rem 2rem;
+    max-width: 800px; margin: 0 auto;
+  }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem; line-height: .6;
+    color: var(--warm); user-select: none;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    line-height: 1.55;
+    color: var(--deep);
+    margin: .5rem 0 1.2rem;
+  }
+  .quote-author {
+    font-size: .95rem; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  /* ── Balloon animation ── */
+  .balloons {
+    position: fixed; bottom: -10px; left: 0; width: 100%;
+    pointer-events: none; z-index: 0;
+  }
+  .balloon {
+    position: absolute; bottom: 0;
+    width: 50px; height: 65px;
+    border-radius: 50% 50% 45% 45%;
+    animation: float-up 8s ease-in infinite;
+    opacity: 0;
+  }
+  .balloon::after {
+    content: '';
+    position: absolute; bottom: -22px; left: 50%;
+    transform: translateX(-50%);
+    width: 1px; height: 22px;
+    background: rgba(0,0,0,.25);
+  }
+  @keyframes float-up {
+    0%   { bottom: -80px; opacity: 0; }
+    10%  { opacity: .85; }
+    85%  { opacity: .6; }
+    100% { bottom: 110vh; opacity: 0; }
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 3rem 1rem 4rem;
+    font-size: .9rem; color: #a08060;
+    letter-spacing: .05em;
+  }
+  footer strong { color: var(--rust); }
+
+  /* ── Confetti burst (on click) ── */
+  .confetti-piece {
+    position: fixed;
+    width: 9px; height: 9px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: confetti-fall 1.4s ease-out forwards;
+  }
+  @keyframes confetti-fall {
+    0%   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+    100% { opacity: 0; transform: translateY(260px) rotate(720deg) scale(.4); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating dots bg -->
+<div class="bg-canvas" id="bgCanvas"></div>
+
+<!-- Balloons -->
+<div class="balloons" id="balloons"></div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="tag">✦ Para o senhor doutor ✦</p>
+  <h1 class="hero-title">
+    Feliz<br>
+    <span>Dia do Pai Nandão!</span>
+  </h1>
+  <p class="hero-subtitle">
+    Para o homem que me ensina o que os professores da universidade não conseguem ensinar, ensina como viver até aos 100 anos, que protege com amor, que experimenta todos os meus projetos e me ajuda em quase todos, 
+    — hoje é o teu dia.
+  </p>
+  <a class="heart-btn" href="#mensagem" onclick="burst(event)">
+    ❤️ &nbsp;Ver mensagem
+  </a>
+  <p class="scroll-hint">↓ continuar</p>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div class="divider"><span class="divider-icon">💻</span></div>
+
+<!-- ── CARDS ── -->
+<section class="cards">
+  <div class="card">
+    <div class="card-icon">🤡</div>
+    <h3 class="card-title">Multifacetado</h3>
+    <p class="card-text"></p><p>Piadas à pai ✅</p><p>Culto ✅</p><p>Cozinheiro ✅</p><p>Carpinteiro ✅</p>  </div>
+  <div class="card">
+    <div class="card-icon">📚</div>
+    <h3 class="card-title">Doutor</h3>
+    <p class="card-text"></p><p>Sábio ✅</p><p>Paciente ✅</p><p>Ajudante ✅</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">🌟</div>
+    <h3 class="card-title">Exemplo</h3>
+    <p class="card-text">Como pai, como chefe dos escuteiros, profissional, cidadão...</p>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<section class="quote-section" id="mensagem">
+  <div class="quote-mark">"</div>
+  <p>
+    <h1>
+    📖
+    🎶
+    🏃‍♂️
+    👨‍🍳
+    🛠️
+    👨‍🏫
+    🖥️
+    </h1>
+    
+  </p>
+  <p class="quote-author">— ao melhor pai do mundo</p>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div class="divider"><span class="divider-icon">🎈</span></div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  Feito por <strong>Nandão</strong> 4FONSO, com ajuda da IA 🤭<br>
+  <span style="font-size:.8rem; opacity:.7;">Todos os direitos reservados.</span>
+</footer>
+
+<script>
+  /* ── Floating dots ── */
+  const canvas = document.getElementById('bgCanvas');
+  const colors = ['#c9922a','#a84b2f','#6fa8c7','#6b7c5e','#e8d5b0'];
+  for (let i = 0; i < 28; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    const size = 4 + Math.random() * 10;
+    d.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${8+Math.random()*14}s;
+      animation-delay:${Math.random()*12}s;
+    `;
+    canvas.appendChild(d);
+  }
+
+  /* ── Balloons ── */
+  const balloonColors = ['#f87171','#fb923c','#fbbf24','#4ade80','#60a5fa','#c084fc'];
+  const bContainer = document.getElementById('balloons');
+  function spawnBalloon() {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.style.cssText = `
+      left:${Math.random()*96}%;
+      background:${balloonColors[Math.floor(Math.random()*balloonColors.length)]};
+      animation-duration:${7+Math.random()*6}s;
+      animation-delay:${Math.random()*3}s;
+    `;
+    bContainer.appendChild(b);
+    setTimeout(() => b.remove(), 14000);
+  }
+  setInterval(spawnBalloon, 1800);
+  spawnBalloon(); spawnBalloon();
+
+  /* ── Scroll reveal for cards ── */
+  const cards = document.querySelectorAll('.card');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: .15 });
+  cards.forEach(c => io.observe(c));
+
+  /* ── Confetti burst ── */
+  function burst(e) {
+    const colors2 = ['#c9922a','#a84b2f','#6fa8c7','#6b7c5e','#fbbf24','#f87171'];
+    for (let i = 0; i < 48; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.cssText = `
+        left:${e.clientX + (Math.random()-0.5)*180}px;
+        top:${e.clientY + (Math.random()-0.5)*80}px;
+        background:${colors2[Math.floor(Math.random()*colors2.length)]};
+        animation-delay:${Math.random()*.4}s;
+        animation-duration:${1+Math.random()*.6}s;
+        border-radius:${Math.random()>0.5?'50%':'2px'};
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 2200);
+    }
+  }
+</script>
+</body>
+</html>
