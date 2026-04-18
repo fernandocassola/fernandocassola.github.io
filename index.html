@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Academic Website | Professor & Researcher</title>
+  <meta name="description" content="Personal academic website presenting research, teaching, projects, publications, and professional activities in computer science, XR, digital twins, interoperability, and immersive systems." />
+  <meta name="theme-color" content="#0b1220" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #111a2e;
+      --surface: rgba(255,255,255,0.05);
+      --surface-strong: rgba(255,255,255,0.08);
+      --text: #edf2ff;
+      --muted: #bcc7df;
+      --accent: #78a8ff;
+      --accent-2: #87f0d4;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 22px 60px rgba(0,0,0,0.28);
+      --radius: 24px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at top left, rgba(120,168,255,0.16), transparent 25%),
+        radial-gradient(circle at 85% 10%, rgba(135,240,212,0.12), transparent 20%),
+        linear-gradient(180deg, #09101b 0%, #0b1220 100%);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 2rem 0;
+    }
+
+    .section-title {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.75rem, 2vw, 2.2rem);
+      line-height: 1.15;
+    }
+
+    .section-intro {
+      margin: 0 0 1.5rem;
+      max-width: 76ch;
+      color: var(--muted);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 18, 32, 0.76);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .brand span { color: var(--accent-2); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 5rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 0.85rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      color: var(--accent-2);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.4rem, 5.2vw, 4.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions, .social-links, .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .hero-actions { margin-top: 1.8rem; }
+    .social-links { margin-top: 1rem; }
+    .contact-links { margin-top: 1.2rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .btn.primary {
+      border: none;
+      background: linear-gradient(135deg, var(--accent), #4e7ef0);
+      color: white;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 1.4rem;
+    }
+
+    .hero-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .meta-list strong { color: var(--text); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.4rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(120,168,255,0.12);
+      border: 1px solid rgba(120,168,255,0.2);
+      color: #e1ecff;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .item h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      color: var(--accent-2);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline .card {
+      border-left: 4px solid var(--accent);
+    }
+
+    .publication-list, .course-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .publication-list li, .course-list li {
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .publication-list strong, .course-list strong {
+      color: var(--text);
+    }
+
+    .footer {
+      padding: 2.5rem 0 4rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .highlight { color: var(--accent-2); }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero { padding-top: 3.5rem; }
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0.9rem 0;
+      }
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">Fernando Cassola<span>.researcher</span></a>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Researcher · Professor · Computer Science</div>
+          <h1>Designing <span class="highlight">immersive</span>, <span class="highlight">interoperable</span> and <span class="highlight">human-centred</span> digital systems.</h1>
+          <p class="lead">
+            I am a researcher at INESC TEC and university professor at FEUP in computer science, working at the intersection of immersive technologies, web systems, service interoperability, digital twins, scientific dashboards, and AI-supported interaction. My work combines research, teaching, and applied innovation to create digital platforms that help people understand complex data, interact with dynamic environments, and collaborate more effectively across physical and virtual spaces.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">Get in touch</a>
+            <a class="btn" href="#projects">View projects</a>
+            <a class="btn" href="#publications">Read publications</a>
+          </div>
+          <div class="social-links">
+            <a class="btn" href="https://github.com/fernandocassola" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="https://scholar.google.pt/citations?user=FDpt3gsAAAAJ&hl=pt-PT" target="_blank" rel="noreferrer">Google Scholar</a>
+            <a class="btn" href="https://orcid.org/0000-0001-7119-8067" target="_blank" rel="noreferrer">ORCID</a>
+            <a class="btn" href="https://www.cienciavitae.pt/en/5914-3D52-A35E" target="_blank" rel="noreferrer">Ciênciavitae</a>
+            <a class="btn" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong>XR</strong>
+              <span>Immersive systems, training, visualization and interaction design</span>
+            </div>
+            <div class="stat">
+              <strong>Digital Twins</strong>
+              <span>Virtual choreographies, orchestration and interoperability</span>
+            </div>
+            <div class="stat">
+              <strong>Education</strong>
+              <span>Teaching, supervision and applied project-based learning</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card hero-card">
+          <img src="fernandocassola.png" alt="Profile photograph" />
+          <div class="meta-list">
+            <div><strong>Name:</strong> Fernando Cassola Marques</div>
+            <div><strong>Role:</strong> Researcher and University Professor</div>
+            <div><strong>Research Institution:</strong> INESC TEC / HumanISE</div>
+            <div><strong>University:</strong> Faculty of Engineering of the University of Porto (FEUP)</div>
+            <div><strong>Location:</strong> Porto - Portugal</div>
+            <div><strong>Email:</strong> <a href="mailto:fernando.c.marques@inesctec.pt">fernando.c.marques@inesctec.pt</a></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <p class="section-intro">
+          My academic and professional activity is driven by a simple question: how can digital systems become more meaningful, more collaborative, and more useful in real-world contexts? I work on the design of interactive platforms that connect data, services, users, and digital representations in ways that support decision-making, learning, and innovation.
+        </p>
+        <div class="grid-2">
+          <article class="card item">
+            <span class="label">Profile</span>
+            <h3>Academic identity</h3>
+            <p>
+              I teach and supervise in areas related to web technologies, information systems, and service-oriented architectures, while also developing research on extended reality, digital twins, immersive dashboards, and interoperable platforms. My work often bridges conceptual frameworks and concrete applications, with a strong emphasis on usability, real deployment scenarios, and multidisciplinary collaboration.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Approach</span>
+            <h3>Research with application value</h3>
+            <p>
+              I am particularly interested in solutions that move beyond prototypes and demonstrate value in practice. This includes systems for immersive training, scientific data visualization, human-centred navigation support, AI-enhanced assistance, and virtual choreographies for complex digital twin ecosystems.
+            </p>
+          </article>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Extended Reality (XR)</span>
+          <span class="tag">Digital Twins</span>
+          <span class="tag">Virtual Choreographies</span>
+          <span class="tag">Scientific Dashboards</span>
+          <span class="tag">Interoperability</span>
+          <span class="tag">Immersive Analytics</span>
+          <span class="tag">Web Technologies</span>
+          <span class="tag">AI-Assisted Interaction</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="container">
+        <h2 class="section-title">Research</h2>
+        <p class="section-intro">
+          My research explores how immersive environments, interoperable architectures, and intelligent digital interfaces can support analysis, collaboration, and action in complex domains.
+        </p>
+        <div class="grid-3">
+          <article class="card item">
+            <span class="label">Research line</span>
+            <h3>Digital twins and virtual choreographies</h3>
+            <p>
+              Development of domain-agnostic frameworks for coordinating and connecting digital twins through virtual choreographies, enabling interoperable and scalable interactions across distributed systems and heterogeneous platforms.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Research line</span>
+            <h3>Extended reality for navigation, training and visualization</h3>
+            <p>
+              Design of XR-based applications for guidance, interaction, monitoring, and collaborative exploration, including augmented and virtual reality experiences tailored to different users, devices, and environments.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Research line</span>
+            <h3>Scientific dashboards and immersive analytics</h3>
+            <p>
+              Creation and evaluation of dashboard platforms that facilitate understanding of complex scientific or operational data, including configurable interfaces, immersive environments, and support for multimodal interaction.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">Selected Projects</h2>
+        <p class="section-intro">
+          These projects represent some of the themes that structure my recent work: interoperability, immersive systems, digital twins, scientific platforms, and applied innovation.
+        </p>
+        <div class="timeline">
+          <article class="card item">
+            <span class="label">Featured project</span>
+            <h3>VChor — Virtual Choreographies for Digital Twins</h3>
+            <p>
+              A framework for structuring and coordinating interactions between digital twins in distributed environments. This work addresses interoperability, orchestration, and abstraction challenges, and has been applied to complex scenarios such as oil spill simulation and ocean-related digital twin ecosystems.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Featured project</span>
+            <h3>Immersive dashboards for offshore energy and ocean visualization</h3>
+            <p>
+              Development of multiplatform immersive dashboards targeting devices such as Meta Quest 3, Apple Vision Pro, smartphones, and AR/VR environments. These systems support the exploration of operational and environmental data through spatial, interactive and collaborative visual interfaces.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Featured project</span>
+            <h3>XR platforms for guidance, assistance and training</h3>
+            <p>
+              Research and prototyping of configurable immersive systems that assist users through visual augmented reality, intelligent audio interaction, virtual guides, and behavioural analysis. These ideas support future work in indoor navigation, contextual assistance, and immersive training platforms.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Featured project</span>
+            <h3>NASYNC — mobile support application for NAS interaction</h3>
+            <p>
+              A mobile application designed to simplify interaction with a NAS environment by enabling targeted synchronization of photo content between a storage system and a smartphone, with a focus on usability, practical integration, and interface quality.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Research and innovation</span>
+            <h3>Immersive serious games and motion-based interaction</h3>
+            <p>
+              Design of interactive systems that promote engagement and physical activity through gesture-based interaction. This includes serious game experiences developed with Unity and Kinect for populations such as older adults.
+            </p>
+          </article>
+          <article class="card item">
+            <span class="label">Strategic coordination</span>
+            <h3>Research leadership and European project involvement</h3>
+            <p>
+              Participation and coordination roles in international and European research initiatives, including projects connected to semantic interoperability, digital twins, applied AI, climate-related challenges, and defence-oriented innovation programmes.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="container">
+        <h2 class="section-title">Publications</h2>
+        <p class="section-intro">
+          My publication record includes conference papers, journal articles, technical contributions, systematic analyses, and research outputs connected to immersive systems, XR, digital twins, interoperability, and scientific visualization.
+        </p>
+        <div class="grid-2">
+          <article class="card item">
+            <span class="label">Recent themes</span>
+            <h3>Representative publication topics</h3>
+            <ul class="publication-list">
+              <li><strong>A Domain-Agnostic Virtual Choreography Framework for Digital Twins:</strong> framework design and application to oil spill scenarios.</li>
+              <li><strong>Immersive dashboards and digital twin platforms:</strong> multiplatform visualization across AR, VR and mobile devices.</li>
+              <li><strong>Current trends in XR application development for mobile devices:</strong> review-driven analysis of platforms, methods and future directions.</li>
+              <li><strong>Scientific dashboard evaluation:</strong> structured analysis of dashboard design in health and scientific contexts.</li>
+            </ul>
+          </article>
+          <article class="card item">
+            <span class="label">Profiles</span>
+            <h3>Academic presence</h3>
+            <p>
+              This section should link directly to your publication profiles so visitors can access the full and updated record.
+            </p>
+            <div class="contact-links">
+              <a class="btn" href="https://scholar.google.com" target="_blank" rel="noreferrer">Google Scholar</a>
+              <a class="btn" href="https://orcid.org" target="_blank" rel="noreferrer">ORCID</a>
+              <a class="btn" href="https://dblp.org" target="_blank" rel="noreferrer">DBLP</a>
+              <a class="btn" href="https://www.scopus.com" target="_blank" rel="noreferrer">Scopus</a>
+            </div>
+            <p class="note">Replace these generic links with your actual public profile URLs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="teaching">
+      <div class="container">
+        <h2 class="section-title">Teaching</h2>
+        <p class="section-intro">
+          Teaching is a central part of my academic identity. I value classes that connect concepts to real problems, encourage reflection, and create opportunities for students to build, question, and apply knowledge.
+        </p>
+        <div class="grid-2">
+          <article class="card item">
+            <span class="label">Courses</span>
+            <h3>Areas I teach</h3>
+            <ul class="course-list">
+              <li><strong>Web Technologies</strong> — design and development of modern digital experiences and web-based systems.</li>
+              <li><strong>Information Systems Management</strong> — organizational, strategic and operational dimensions of information systems.</li>
+              <li><strong>Service-Oriented Architecture and Web Service Interoperability</strong> — distributed integration, service composition and interoperability mechanisms.</li>
+            </ul>
+          </article>
+          <article class="card item">
+            <span class="label">Pedagogy</span>
+            <h3>How I approach teaching</h3>
+            <p>
+              My classes often begin with informal prompts, reflection moments or challenges that connect academic content to real life. I favour practical tasks, structured weekly challenges, project-based learning, and research-oriented supervision that pushes students to think critically while building concrete outcomes.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-intro">
+          I am open to academic collaboration, invited talks, supervision opportunities, project partnerships, interdisciplinary research, and innovation-oriented initiatives.
+        </p>
+        <div class="card item">
+          <h3>Let’s connect</h3>
+          <p>
+            <strong>Email:</strong> <a href="mailto:your.email@domain.com">your.email@domain.com</a><br />
+            <strong>GitHub:</strong> <a href="https://github.com/fernandocassola" target="_blank" rel="noreferrer">github.com/fernandocassola</a><br />
+            <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/fernandocassola" target="_blank" rel="noreferrer">linkedin.com/in/fernandocassola</a><br />
+            <strong>Institutional page:</strong> <a href="https://www.inesctec.pt/pt/pessoas/fernando-cassola-marques">Fernando Cassola (INESC TEC)</a>
+          </p>
+          <div class="contact-links">
+            <a class="btn primary" href="mailto:your.email@domain.com">Email me</a>
+            <a class="btn" href="https://github.com/fernandocassola" target="_blank" rel="noreferrer">View GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/fernandocassola" target="_blank" rel="noreferrer">View LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Fernando Cassola. Built for GitHub Pages.
+    </div>
+  </footer>
+</body>
+</html>
