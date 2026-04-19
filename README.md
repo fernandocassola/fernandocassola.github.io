@@ -1,3 +1,3 @@
 # [FERNANDO CASSOLA website](https://fernandocassola.com)
 
-Soon my personal website
+Current version: 18.04.2026
